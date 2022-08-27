@@ -1,35 +1,42 @@
-  
-//UC5 - Calculate Wage Till A Condition 
+//UC6  To Store daily wage along with total wage
 
 const IS_PART_TIME = 1;
 const IS_FULL_TIME = 2;
 const PART_TIME_HOURS = 4;
 const FULL_TIME_HOURS = 8;
-const WAGE_PER_HOUR = 20;
+const WAGE_PER_HOUR = 20; 
 const NUM_OF_WORKING_DAYS = 20;
-const MAX_HOURS_IN_MONTH = 100;
+const MAX_HRS_IN_MONTH = 160;
 
-function getWorkinghours(empCheck){
+function getWorkingHours(empCheck) {
     switch(empCheck){
-        case 1:IS_PART_TIME:
+        case 1: IS_PART_TIME:
             return PART_TIME_HOURS;
-        case 2:IS_FULL_TIME:
+        case 2: IS_FULL_TIME:
             return FULL_TIME_HOURS;
         default:
             return 0;
     }
 }
-
+// caluclate wage per hour using functon
+function calcWage(empHrs) {
+    return empHrs * WAGE_PER_HOUR;
+}
+// read inputes 
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
-while (totalEmpHrs <= MAX_HOURS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+let empWageArray = new Array();
+
+while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
     totalWorkingDays++;
-    let empCheck = Math.floor(Math.random() * 10) % 3;
-    totalEmpHrs += getWorkinghours(empCheck);
+    let empCheck = Math.floor((Math.random() * 10) % 3);
+    let empHrs = getWorkingHours(empCheck);
+    totalEmpHrs += empHrs;
+    empWageArray.push(calcWage(empHrs)); 
 }
 
-let empWage = totalEmpHrs * WAGE_PER_HOUR;
+let empWage = calcWage(totalEmpHrs);
 
-console.log("Total Working days: " +totalWorkingDays);
-console.log("Total Employee Hours= " +totalEmpHrs);
-console.log("Total Employee Wage =" +empWage);
+console.log("Total Employee Working Hours : " + totalEmpHrs + 
+"\nTotal Employee Working Days :  " + totalWorkingDays +
+ "\nTotal Employee Wage : " + empWage);
